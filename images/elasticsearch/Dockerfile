@@ -1,4 +1,4 @@
-FROM server:4444/oracle-java7
+FROM relateiq/oracle-java7
 
 # elasticsearch
 RUN apt-get update

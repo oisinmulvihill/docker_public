@@ -1,5 +1,5 @@
-FROM server:4444/storm-base
- 
+FROM relateiq/storm-base
+
 ADD storm.yaml /storm/conf/storm.yaml
 ADD storm_util.sh /storm/storm_util.sh
 ADD storm-nimbus-start.sh storm/storm-nimbus-start.sh

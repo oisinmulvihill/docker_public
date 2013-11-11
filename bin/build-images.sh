@@ -7,5 +7,5 @@ do
 	cd $dir &&
 	image_name=${PWD##*/} && # to assign to a variable
 	echo "Building $image_name from $dir" &&
-	docker build -t server:4444/$image_name .
+	docker build -t relateiq/$image_name .
 done

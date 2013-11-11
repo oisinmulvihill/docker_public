@@ -1,5 +1,5 @@
-FROM server:4444/storm-base
- 
+FROM relateiq/storm-base
+
 ADD storm.yaml /storm/conf/storm.yaml
 ADD storm-supervisor-start.sh storm/storm-supervisor-start.sh
 

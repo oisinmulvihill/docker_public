@@ -29,7 +29,7 @@ start(){
 		-p 2181:2181 \
 		-v $APPS/zookeeper/logs:/logs \
 		-name zookeeper \
-		server:4444/zookeeper)
+		relateiq/zookeeper)
 	echo "Started ZOOKEEPER in container $ZOOKEEPER"
 
 	mkdir -p $APPS/redis/data
@@ -39,7 +39,7 @@ start(){
 		-v $APPS/redis/data:/data \
 		-v $APPS/redis/logs:/logs \
 		-d \
-		server:4444/redis)
+		relateiq/redis)
 	echo "Started REDIS in container $REDIS"
 
 	mkdir -p $APPS/cassandra/data
@@ -53,7 +53,7 @@ start(){
 		-v $APPS/cassandra/data:/data \
 		-v $APPS/cassandra/logs:/logs \
 		-d \
-		server:4444/cassandra)
+		relateiq/cassandra)
 	echo "Started CASSANDRA in container $CASSANDRA"
 
 	mkdir -p $APPS/elasticsearch/data
@@ -64,7 +64,7 @@ start(){
 		-v $APPS/elasticsearch/data:/data \
 		-v $APPS/elasticsearch/logs:/logs \
 		-d \
-		server:4444/elasticsearch)
+		relateiq/elasticsearch)
 	echo "Started ELASTICSEARCH in container $ELASTICSEARCH"
 
 	mkdir -p $APPS/mongo/data
@@ -75,7 +75,7 @@ start(){
 		-v $APPS/mongo/data:/data/lucid_prod \
 		-v $APPS/mongo/logs:/logs \
 		-d \
-		server:4444/mongo)
+		relateiq/mongo)
 	echo "Started MONGO in container $MONGO"
 
 	mkdir -p $APPS/kafka/data
@@ -88,7 +88,7 @@ start(){
 		-v $APPS/kafka/logs:/logs \
 		-name kafka \
 		-link zookeeper:zookeeper \
-		server:4444/kafka)
+		relateiq/kafka)
 	echo "Started KAFKA in container $KAFKA"
 
 	SHIPYARD=$(docker run \
@@ -104,12 +104,12 @@ update(){
 	apt-get update
 	apt-get install -y lxc-docker
 
-	docker pull server:4444/zookeeper
-	docker pull server:4444/redis
-	docker pull server:4444/cassandra
-	docker pull server:4444/elasticsearch
-	docker pull server:4444/mongo
-	docker pull server:4444/kafka
+	docker pull relateiq/zookeeper
+	docker pull relateiq/redis
+	docker pull relateiq/cassandra
+	docker pull relateiq/elasticsearch
+	docker pull relateiq/mongo
+	docker pull relateiq/kafka
 	docker pull ehazlett/shipyard
 }
 
