@@ -94,7 +94,7 @@ start(){
 	SHIPYARD=$(docker run \
 		-p 8005:8000 \
 		-d \
-		ehazlett/shipyard)
+		shipyard/shipyard)
 
 	sleep 1
 
@@ -103,6 +103,7 @@ start(){
 update(){
 	apt-get update
 	apt-get install -y lxc-docker
+	cp /vagrant/etc/docker.conf /etc/init/docker.conf
 
 	docker pull relateiq/zookeeper
 	docker pull relateiq/redis
@@ -110,7 +111,7 @@ update(){
 	docker pull relateiq/elasticsearch
 	docker pull relateiq/mongo
 	docker pull relateiq/kafka
-	docker pull ehazlett/shipyard
+	docker pull shipyard/shipyard
 }
 
 case "$1" in
