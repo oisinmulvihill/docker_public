@@ -1,4 +1,4 @@
-FROM relateiq/oracle-java7
+FROM dockeruser/oracle-java7-jdk
 
 RUN apt-get update
 RUN apt-get install -y wget bzip2

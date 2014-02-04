@@ -1,4 +1,4 @@
-FROM relateiq/oracle-java7
+FROM dockeruser/oracle-java7-jdk
 
 # apt
 RUN apt-get update

@@ -1,9 +1,9 @@
-FROM relateiq/oracle-java7
+FROM dockeruser/oracle-java7-jdk
 
 RUN apt-get update
 RUN apt-get install -y git curl build-essential make gcc wget
 
-RUN cd /opt && wget http://apache.mirrors.pair.com/cassandra/1.2.9/apache-cassandra-1.2.9-bin.tar.gz
+RUN cd /opt && wget http://apache.mirrors.pair.com/cassandra/1.2.14/apache-cassandra-1.2.14-bin.tar.gz
 RUN cd /opt && tar zxf apache-cassandra-*.tar.gz
 RUN rm /opt/*.tar.gz
 RUN mv /opt/apache-cassandra-* /opt/cassandra
