@@ -21,6 +21,9 @@ stop(){
 }
 
 start(){
+	echo -e "** Launching containers **\n\n"
+
+	echo "Starting ZOOKEEPER..."
 	mkdir -p $APPS/zookeeper/data
 	mkdir -p $APPS/zookeeper/logs
 	sudo docker rm zookeeper > /dev/null 2>&1
@@ -29,9 +32,10 @@ start(){
 		-p 2181:2181 \
 		-v $APPS/zookeeper/logs:/logs \
 		-name zookeeper \
-		relateiq/zookeeper)
+		oisinmulvihill/zookeeper)
 	echo "Started ZOOKEEPER in container $ZOOKEEPER"
 
+	echo "Starting REDIS..."
 	mkdir -p $APPS/redis/data
 	mkdir -p $APPS/redis/logs
 	REDIS=$(docker run \
@@ -39,23 +43,10 @@ start(){
 		-v $APPS/redis/data:/data \
 		-v $APPS/redis/logs:/logs \
 		-d \
-		relateiq/redis)
+		oisinmulvihill/redis)
 	echo "Started REDIS in container $REDIS"
 
-	mkdir -p $APPS/cassandra/data
-	mkdir -p $APPS/cassandra/logs
-	CASSANDRA=$(docker run \
-		-p 7000:7000 \
-		-p 7001:7001 \
-		-p 7199:7199 \
-		-p 9160:9160 \
-		-p 9042:9042 \
-		-v $APPS/cassandra/data:/data \
-		-v $APPS/cassandra/logs:/logs \
-		-d \
-		relateiq/cassandra)
-	echo "Started CASSANDRA in container $CASSANDRA"
-
+	echo "Starting ELASTICSEARCH..."
 	mkdir -p $APPS/elasticsearch/data
 	mkdir -p $APPS/elasticsearch/logs
 	ELASTICSEARCH=$(docker run \
@@ -64,9 +55,10 @@ start(){
 		-v $APPS/elasticsearch/data:/data \
 		-v $APPS/elasticsearch/logs:/logs \
 		-d \
-		relateiq/elasticsearch)
+		oisinmulvihill/elasticsearch)
 	echo "Started ELASTICSEARCH in container $ELASTICSEARCH"
 
+	echo "Starting MONGO..."
 	mkdir -p $APPS/mongo/data
 	mkdir -p $APPS/mongo/logs
 	MONGO=$(docker run \
@@ -75,22 +67,10 @@ start(){
 		-v $APPS/mongo/data:/data/lucid_prod \
 		-v $APPS/mongo/logs:/logs \
 		-d \
-		relateiq/mongo)
+		oisinmulvihill/mongo)
 	echo "Started MONGO in container $MONGO"
 
-	mkdir -p $APPS/kafka/data
-	mkdir -p $APPS/kafka/logs
-	sudo docker rm kafka > /dev/null 2>&1
-	KAFKA=$(docker run \
-		-d \
-		-p 9092:9092 \
-		-v $APPS/kafka/data:/data \
-		-v $APPS/kafka/logs:/logs \
-		-name kafka \
-		-link zookeeper:zookeeper \
-		relateiq/kafka)
-	echo "Started KAFKA in container $KAFKA"
-
+	echo "Starting SHIPYARD..."
 	SHIPYARD=$(docker run \
 		-p 8005:8000 \
 		-d \
@@ -105,13 +85,11 @@ update(){
 	apt-get install -y lxc-docker
 	cp /vagrant/etc/docker.conf /etc/init/docker.conf
 
-	docker pull relateiq/zookeeper
-	docker pull relateiq/redis
-	docker pull relateiq/cassandra
-	docker pull relateiq/elasticsearch
-	docker pull relateiq/mongo
-	docker pull relateiq/kafka
-	docker pull shipyard/shipyard
+	docker pull omulvihill/zookeeper
+	docker pull omulvihill/redis
+	docker pull omulvihill/elasticsearch
+	docker pull omulvihill/mongo
+	docker pull omulvihill/shipyard
 }
 
 case "$1" in

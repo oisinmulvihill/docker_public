@@ -14,6 +14,7 @@ Vagrant::Config.run do |config|
 
   #Shipyard
   config.vm.forward_port 8005, 8005
+
   #redis
   config.vm.forward_port 6379, 6379
 
@@ -21,36 +22,12 @@ Vagrant::Config.run do |config|
   config.vm.forward_port 9200, 9200
   config.vm.forward_port 9300, 9300
 
-  #cassandra
-  config.vm.forward_port 7000, 7000
-  config.vm.forward_port 7001, 7001
-  config.vm.forward_port 7199, 7199
-  config.vm.forward_port 9160, 9160
-  config.vm.forward_port 9042, 9042
-
   #mongo
   config.vm.forward_port 27017, 27017
   config.vm.forward_port 28017, 28017
 
-  #kafka
-  config.vm.forward_port 9092, 9092
-  config.vm.forward_port 7203, 7203
-
   #zookeeper
   config.vm.forward_port 2181, 2181
-
-  #jetty
-  config.vm.forward_port 8080, 8080
-
-  #Storm UI
-  config.vm.forward_port 8081, 8081
-
-  # riemann
-  config.vm.forward_port 5555, 5555, protocol: 'tcp'
-  config.vm.forward_port 5555, 5555, protocol: 'udp'
-  config.vm.forward_port 5556, 5556
-  config.vm.forward_port 5557, 5557
-  config.vm.forward_port 4567, 4567
 
   # Provision docker and new kernel if deployment was not done.
   # It is assumed Vagrant can successfully launch the provider instance.
