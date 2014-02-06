@@ -16,7 +16,7 @@ Vagrant::Config.run do |config|
   config.vm.forward_port 8005, 8005
 
   #redis
-  config.vm.forward_port 6379, 6379
+  config.vm.forward_port 16379, 16379
 
   #elasticsearch
   config.vm.forward_port 9200, 9200
@@ -25,9 +25,6 @@ Vagrant::Config.run do |config|
   #mongo
   config.vm.forward_port 27017, 27017
   config.vm.forward_port 28017, 28017
-
-  #zookeeper
-  config.vm.forward_port 2181, 2181
 
   # Provision docker and new kernel if deployment was not done.
   # It is assumed Vagrant can successfully launch the provider instance.
@@ -43,9 +40,9 @@ Vagrant::Config.run do |config|
     if ENV["VAGRANT_DEFAULT_PROVIDER"].nil? && ARGV.none? { |arg| arg.downcase.start_with?("--provider") }
       pkg_cmd << "apt-get install -q -y linux-headers-generic-lts-raring dkms; " \
         "echo 'Downloading VBox Guest Additions...'; " \
-        "wget -q http://dlc.sun.com.edgesuite.net/virtualbox/4.2.12/VBoxGuestAdditions_4.2.12.iso; "
+        "wget -q http://dlc.sun.com.edgesuite.net/virtualbox/4.3.6/VBoxGuestAdditions_4.3.6.iso; "
       # Prepare the VM to add guest additions after reboot
-      pkg_cmd << "echo -e 'mount -o loop,ro /home/vagrant/VBoxGuestAdditions_4.2.12.iso /mnt\n" \
+      pkg_cmd << "echo -e 'mount -o loop,ro /home/vagrant/VBoxGuestAdditions_4.3.6.iso /mnt\n" \
         "echo yes | /mnt/VBoxLinuxAdditions.run\numount /mnt\n" \
           "rm /root/guest_additions.sh; ' > /root/guest_additions.sh; " \
         "chmod 700 /root/guest_additions.sh; " \

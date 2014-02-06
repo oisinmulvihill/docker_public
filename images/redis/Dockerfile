@@ -16,6 +16,6 @@ VOLUME [ "/data" ]
 
 ADD redis.conf redis.conf
 
-EXPOSE 6379
+EXPOSE 16379
 
-CMD ["redis/src/redis-server", "redis.conf"] 
+CMD ["redis/src/redis-server", "redis.conf"]
