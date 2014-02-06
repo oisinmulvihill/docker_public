@@ -1,5 +1,5 @@
 # http://stackoverflow.com/questions/17252356/run-a-service-automatically-in-a-docker-container
-FROM ubuntu:12.04
+FROM ubuntu
 RUN apt-get update
 RUN apt-get install -y openssh-server curl
 RUN curl http://apt.basho.com/gpg/basho.apt.key | apt-key add -

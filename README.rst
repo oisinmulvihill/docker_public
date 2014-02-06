@@ -5,7 +5,10 @@ A development environment built around docker and services running in
 containers. This was forked from "A Docker Dev Environment in 24 Hours!" and
 hacked for my own ends:
 
- * http://blog.relateiq.com/a-docker-dev-environment-in-24-hours-part-2-of-2/
+* http://blog.relateiq.com/a-docker-dev-environment-in-24-hours-part-2-of-2/
+
+This may not be in a running state as I've noticed the image building needs
+updating every few weeks as various project versions tick over.
 
 
 Installation
@@ -61,10 +64,20 @@ You should see::
 
     $ ./bin/devenv start
     Started REDIS in container f49c9910da35
-    Started ELASTICSEARCH in container 802a9f1139d9
     Started MONGO in container 33e5df9178a4
     Started RIAK in container 52f3233972fb
-    Started DEVOX in container d3475cfe8161
+    :
+    etc
+
+You can connect in and look around with ssh::
+
+    ./bin/devenv ssh
+
+You could also tunnel access from localhost on the host machine to the various
+running services running inside the VM::
+
+    # Redis on: 6379, Mongo on: 27017, Riak on: 8098
+    vagrant ssh -- -L6379:localhost:6379 -L27017:localhost:27017 -L28017:localhost:28017 -L8098:localhost:8098 -N
 
 
 stop || kill

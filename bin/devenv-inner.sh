@@ -53,32 +53,19 @@ start(){
 		oisinmulvihill/riak)
 	echo "Started RIAK in container $RIAK"
 
-	echo "Starting DEVBOX..."
-	RIAK=$(sudo docker run \
-		-p 1022:22 \
-		-d \
-		oisinmulvihill/devbox)
-	echo "Started DEVBOX in container $DEVBOX"
-
-	echo "Starting SHIPYARD..."
-	SHIPYARD=$(sudo docker run \
-		-p 8005:8000 \
-		-d \
-		oisinmulvihill/shipyard)
-
 	sleep 1
 }
 
 update(){
-	apt-get update
+	apt-get update -fy
+	apt-get upgrade -fy
 	apt-get install -y lxc-docker
 	cp /vagrant/etc/docker.conf /etc/init/docker.conf
 
-	docker pull omulvihill/redis
-	docker pull omulvihill/mongo
-	docker pull omulvihill/riak
-	docker pull omulvihill/devbox
-	docker pull omulvihill/shipyard
+	# for item in redis mongo riak devbox shipyard ;
+	# do
+	# 	docker pull omulvihill/$item
+	# done
 }
 
 build_images() {
